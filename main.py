@@ -31,7 +31,7 @@ os.chdir(f"songs/{spotifyid}")
 
 print("Searching for song...")
 if not exists(f"{spotifyid}.mp3"):
-	os.system(f"spotdl --output {{track-id}} --format mp3 --download {spotifyurl}")
+	os.system(f"spotdl --output {{track-id}} --format mp3 --download https://open.spotify.com/track/{spotifyurl}")
 
 print("Searching for lyrics...")
 if not exists(f"{spotifyid}.json"):
@@ -45,7 +45,7 @@ else:
 
 print("Generating backing video...")
 if not exists(f"{spotifyid}.mp4"):
-	os.system(f"avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4 --no-preview")
+	os.system(f"xvfb-run avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4 --no-preview")
 
 print("Generating images...")
 
