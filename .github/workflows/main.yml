@@ -36,7 +36,7 @@ jobs:
         run: pip3 install audio-visualizer-python/
 
       - name: Download song
-        run: spotdl --output {track-id} --format mp3 --download ${{ github.event.inputs.id }}
+        run: spotdl --output {track-id} --format mp3 --download https://open.spotify.com/track/${{ github.event.inputs.id }}
 
       - name: Generate visualizer
         run: xvfb-run avp -c 0 classic layout=top color=255,255,255 -i ${{ github.event.inputs.id }}.mp3 -o ${{ github.event.inputs.id }}.mp4 --no-preview
