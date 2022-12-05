@@ -24,7 +24,7 @@ jobs:
         run: pip3 install -r requirements.txt
 
       - name: Install dependencies
-        run: sudo apt install ffmpeg python3-pyqt5 imagemagick libxcb-xinerama0
+        run: sudo apt install ffmpeg python3-pyqt5 imagemagick xvfb libxcb-xinerama0
 
       - name: Clone Audio Visualizer Python repo
         run: git clone https://github.com/djfun/audio-visualizer-python
@@ -36,7 +36,7 @@ jobs:
         run: spotdl --output {track-id} --format mp3 --download ${{ github.event.inputs.id }}
 
       - name: Generate visualizer
-        run: avp -c 0 classic layout=top color=255,255,255 -i ${{ github.event.inputs.id }}.mp3 -o ${{ github.event.inputs.id }}.mp4 --no-preview
+        run: xvfb avp -c 0 classic layout=top color=255,255,255 -i ${{ github.event.inputs.id }}.mp3 -o ${{ github.event.inputs.id }}.mp4 --no-preview
 
       - name: Run main
         run: python3 main.py ${{ github.event.inputs.id }}
