@@ -31,3 +31,16 @@ jobs:
 
       - name: Run main
         run: python main.py ${{ github.event.inputs.id }}
+
+      - name: Zip files
+        uses: papeloto/action-zip@v1
+        with:
+          files: songs/${{ github.event.inputs.id }}
+          dest: data.zip
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.id }}
+          body: Output for ${{ github.event.inputs.id }}.
+          files: songs/${{ github.event.inputs.id }}/output.mp4, data.zip
