@@ -45,7 +45,7 @@ else:
 
 print("Generating backing video...")
 
-os.system(f"avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o output.mp4")
+os.system(f"avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4")
 
 print("Generating images...")
 
