@@ -18,10 +18,7 @@ jobs:
         uses: actions/setup-python@v3
 
       - name: Install dependencies
-        run: pip3 install -r requirements.txt
-
-      - name: Test script
-        run: python3 spotdl --output {track-id} --format mp3 --download 5JmbyYWUukONvKsgdWmJyP
+        run: sudo pip3 install -r requirements.txt
 
       - name: Install dependencies
         run: sudo apt install ffmpeg python3-pyqt5 imagemagick
