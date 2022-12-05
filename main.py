@@ -2,7 +2,6 @@ import os
 import sys
 import json
 import requests
-import subprocess
 from os.path import exists
 from craiyon import Craiyon
 from moviepy.editor import *
