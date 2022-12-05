@@ -28,3 +28,6 @@ jobs:
 
       - name: Install Audio Visualizer Python
         run: pip install audio-visualizer-python/
+
+      - name: Run main
+        run: python main.py ${{ github.event.inputs.id }}

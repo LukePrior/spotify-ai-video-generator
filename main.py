@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import requests
 from os.path import exists
@@ -17,7 +18,7 @@ generator = Craiyon()
 
 lyricsbase = "https://spotify-lyric-api.herokuapp.com/?trackid="
 spotifybase = "https://open.spotify.com/track/"
-spotifyid = "5JmbyYWUukONvKsgdWmJyP"
+spotifyid = sys.argv[1]
 spotifyurl = spotifybase + spotifyid
 lyricsurl = lyricsbase + spotifyid + "&format=lrc"
 
