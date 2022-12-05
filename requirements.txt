@@ -1,1 +1,4 @@
 spotify-dl
+craiyon
+moviepy
+PIL
