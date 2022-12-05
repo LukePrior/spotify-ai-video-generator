@@ -33,7 +33,7 @@ os.chdir(f"songs/{spotifyid}")
 print("Searching for song...")
 if not exists(f"{spotifyid}.mp3"):
 	try:
-		subprocess.run([f"spotdl --output {{track-id}} --format mp3 --download https://open.spotify.com/track/{spotifyurl}"], check = True)
+		subprocess.run([f"spotdl --output {{track-id}} --format mp3 --download https://open.spotify.com/track/{spotifyid}"], check = True)
 	except subprocess.CalledProcessError as e:
 		print("Error: Song not found.\n", e.output)
 		sys.exit(1)
