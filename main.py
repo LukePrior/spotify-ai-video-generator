@@ -44,8 +44,8 @@ else:
 		lyricsjson = json.load(f)
 
 print("Generating backing video...")
-
-os.system(f"avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4")
+if not exists(f"{spotifyid}.mp4"):
+	os.system(f"avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4 --no-preview")
 
 print("Generating images...")
 
