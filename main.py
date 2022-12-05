@@ -33,9 +33,9 @@ os.chdir(f"songs/{spotifyid}")
 print("Searching for song...")
 if not exists(f"{spotifyid}.mp3"):
 	try:
-		subprocess.run([f"spotdl --output {{track-id}} --format mp3 --download {spotifyurl}"], check = True)
-	except subprocess.CalledProcessError as e:
-		print("Error: Song not found.\n", e.output)
+		os.system(f"spotdl --output {{track-id}} --format mp3 --download {spotifyurl}")
+	except:
+		print("Error: Song not found.")
 		sys.exit(1)
 
 print("Searching for lyrics...")
@@ -51,9 +51,9 @@ else:
 print("Generating backing video...")
 if not exists(f"{spotifyid}.mp4"):
 	try:
-		subprocess.run([f"xvfb-run avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4 --no-preview"], check = True)
-	except subprocess.CalledProcessError as e:
-		print("Error: Video generation failed.\n", e.output)
+		os.system(f"xvfb-run avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4 --no-preview")
+	except:
+		print("Error: Video generation failed.")
 		sys.exit(1)
 
 print("Generating images...")
