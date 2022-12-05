@@ -21,4 +21,10 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Install ffmpeg
-        uses: FedericoCarboni/setup-ffmpeg@v1
+        uses: sudo apt install ffmpeg
+
+      - name: Clone Audio Visualizer Python repo
+        run: git clone https://github.com/djfun/audio-visualizer-python
+
+      - name: Install Audio Visualizer Python
+        run: pip install audio-visualizer-python/
