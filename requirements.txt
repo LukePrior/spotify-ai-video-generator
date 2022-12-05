@@ -1,4 +1,4 @@
 spotify-dl
-craiyon
+craiyon.py
 moviepy
 PIL
