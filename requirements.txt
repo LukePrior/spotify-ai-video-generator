@@ -1,5 +1,5 @@
+requests
 spotify-dl
 craiyon.py
 moviepy
 Pillow
-requests
