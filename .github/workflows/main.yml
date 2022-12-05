@@ -20,11 +20,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Install ffmpeg
-        run: sudo apt install ffmpeg
-
-      - name: Install ImageMagick
-        run: sudo apt install imagemagick
+      - name: Install dependencies
+        run: sudo apt install ffmpeg python3-pyqt5 imagemagick
 
       - name: Clone Audio Visualizer Python repo
         run: git clone https://github.com/djfun/audio-visualizer-python
