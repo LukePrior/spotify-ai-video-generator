@@ -19,3 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Install ffmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v1
