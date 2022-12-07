@@ -14,6 +14,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Test
+        run: convert -list font
+
       - name: Setup Python
         uses: actions/setup-python@v3
 
