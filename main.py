@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 import json
 import requests
@@ -22,6 +23,9 @@ spotifyid = sys.argv[1]
 spotifyurl = spotifybase + spotifyid
 lyricsurl = lyricsbase + spotifyid + "&format=lrc"
 
+max_runs = 2
+run_count = 0
+
 home = os.getcwd()
 if not os.path.exists("songs/"):
 	os.makedirs("songs/")
@@ -31,10 +35,17 @@ os.chdir(f"songs/{spotifyid}")
 
 print("Searching for song...")
 if not exists(f"{spotifyid}.mp3"):
-	try:
-		os.system(f"spotdl --output {{track-id}} --format mp3 --download {spotifyurl}")
-	except:
-		print("Error: Song not found.")
+	while run_count < max_runs:
+		try:
+			subprocess.run(["spotdl", "--output", "{track-id}", "--format", "mp3", "--download", f"{spotifyurl}"])
+		except subprocess.CalledProcessError as e:
+			print(e)
+			run_count += 1
+			continue
+		else:
+			break
+	if run_count == max_runs:
+		print("Error: Song download failed.")
 		sys.exit(1)
 
 print("Searching for lyrics...")
@@ -49,9 +60,17 @@ else:
 
 print("Generating backing video...")
 if not exists(f"{spotifyid}.mp4"):
-	try:
-		os.system(f"xvfb-run avp -c 0 classic layout=top color=255,255,255 -i {spotifyid}.mp3 -o {spotifyid}.mp4 --no-preview")
-	except:
+	run_count = 0
+	while run_count < max_runs:
+		try:
+			subprocess.run(["xvfb-run", "avp", "-c", "0", "classic", "layout=top", "color=255,255,255", "-i", f"{spotifyid}.mp3", "-o", f"{spotifyid}.mp4", "--no-preview"])
+		except subprocess.CalledProcessError as e:
+			print(e)
+			run_count += 1
+			continue
+		else:
+			break
+	if run_count == max_runs:
 		print("Error: Video generation failed.")
 		sys.exit(1)
 
@@ -86,7 +105,7 @@ print("Generating video...")
 
 video = VideoFileClip(f"{spotifyid}.mp4")
 
-generator = lambda txt: TextClip(txt, font='Liberation-Sans', fontsize=72, color='white')
+generator = lambda txt: TextClip(txt, font='Liberation-Sans', fontsize=48, color='white')
 
 subconvert = []
 images = []
@@ -103,11 +122,11 @@ for i in range(length):
 	duration = end - start
 	subtitle = ((start, end), line["words"])
 	folder = mappings[line["words"]]
-	image = ImageClip(f"images/{folder}/image-{random.randint(1, 9)}.png").resize(height=768).set_start(start).set_duration(duration).set_pos(("center", 156)).margin(mar=5, color=(255, 255, 255))
+	image = ImageClip(f"images/{folder}/image-{random.randint(1, 9)}.png").resize(height=512).set_start(start).set_duration(duration).set_pos(("center", 104)).margin(mar=5, color=(255, 255, 255))
 	subconvert.append(subtitle)
 	images.append(image)
 
-subs = SubtitlesClip(subconvert, generator).set_pos(("center", 966))
+subs = SubtitlesClip(subconvert, generator).set_pos(("center", 644))
 
 result = CompositeVideoClip([video, subs] + images)
 
