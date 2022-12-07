@@ -30,7 +30,7 @@ jobs:
         run: sudo apt install ffmpeg python3-pyqt5 imagemagick xvfb libxcb-xinerama0
 
       - name: Fix policy
-        run: sed -i '/<policy domain="path" rights="none" pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+        run: sudo sed -i '/<policy domain="path" rights="none" pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
 
       - name: Clone Audio Visualizer Python repo
         run: git clone https://github.com/djfun/audio-visualizer-python
