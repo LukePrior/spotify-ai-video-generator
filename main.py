@@ -86,7 +86,7 @@ print("Generating video...")
 
 video = VideoFileClip(f"{spotifyid}.mp4")
 
-generator = lambda txt: TextClip(txt, font='NimbusSans-Regular', fontsize=72, color='white')
+generator = lambda txt: TextClip(txt, font='Liberation-Sans', fontsize=72, color='white')
 
 subconvert = []
 images = []
