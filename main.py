@@ -62,7 +62,7 @@ else:
 	with open(f"{spotifyid}.json", "r") as f:
 		lyricsjson = json.load(f)
 
-if lyricsjson.error == False:
+if lyricsjson["error"] == False:
 	print("Error: Lyrics not found.")
 	sys.exit(1)
 
