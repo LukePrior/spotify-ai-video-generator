@@ -23,7 +23,7 @@ spotifyid = sys.argv[1]
 spotifyurl = spotifybase + spotifyid
 lyricsurl = lyricsbase + spotifyid + "&format=lrc"
 
-max_runs = 2
+max_runs = 3
 run_count = 0
 
 home = os.getcwd()
@@ -43,7 +43,11 @@ if not exists(f"{spotifyid}.mp3"):
 			run_count += 1
 			continue
 		else:
-			break
+			if not exists(f"{spotifyid}.mp3"):
+				run_count += 1
+				continue
+			else:
+				break
 	if run_count == max_runs:
 		print("Error: Song download failed.")
 		sys.exit(1)
