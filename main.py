@@ -62,6 +62,10 @@ else:
 	with open(f"{spotifyid}.json", "r") as f:
 		lyricsjson = json.load(f)
 
+if lyricsjson.error == False:
+	print("Error: Lyrics not found.")
+	sys.exit(1)
+
 print("Generating backing video...")
 if not exists(f"{spotifyid}.mp4"):
 	run_count = 0
